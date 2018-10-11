@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "sdkVersion": "27.0.0",
+    
+   "android": {
+       "package": "com.example.myapp"
+   
+	},
+	"ios": {
+       "bundleIdentifier": "com.yourcompany.yourappname"
+   
+	}
+	
+  }
+}
