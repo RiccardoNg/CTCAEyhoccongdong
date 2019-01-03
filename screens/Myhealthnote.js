@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {AppRegistry,Picker, SectionList, Alert, View, Text, Button, TextInput, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
+import {AppRegistry,Picker, SectionList, Alert, View, Text, Button, TextInput, StyleSheet, ScrollView, TouchableOpacity, Dimensions, Image } from 'react-native';
 import { FormLabel, FormInput, FormValidationMessage, SearchBar, ListItem, Avatar, Rating } from 'react-native-elements';
 import Popover from 'react-native-popover-view';
 import {Rect as RectPop} from 'react-native-popover-view';
@@ -206,174 +206,37 @@ export class Myhealthnote extends Component {
 					</Text>
 				</View>
         	<View style={styles.body}>
-					<View style={styles.result} >
-						<View style={styles.resultHeader}>
-							<Text style={styles.resultTitle}>
-							Avatar-Name-Honorpoint-Tips: {this.state.result}
-							</Text>
+					<View style={styles.personalInfo} >
+						<View style={styles.avatarBlock}>
+							<Image style={styles.avatarImage} source={require('../icons/facebook.png')} />
 						</View>
-						<View style={styles.resultHeader}>
-							<Text style={styles.resultTitle}>
-							Time/Result table: {this.state.result}
-							</Text>
+						<View style={styles.nameBlock}>
+							<View style={styles.nameTextBlock}>
+								<Text style={styles.nameText}>
+									Kami-sama
+								</Text>
+							</View>
+							<View style={styles.tipsBlock}>
+								<Text style={styles.tipsText}>
+									This is tips
+								</Text>
+							</View>
 						</View>
-						<View style={styles.resultHeader}>
-							<Text style={styles.resultTitle}>
-							Doctor note: {this.state.result}
-							</Text>
-						</View>
-						<ScrollView showsVerticalScrollIndicator={false}>
-							<Text style={styles.resultDesc}>
-								Select each stage for T, N, M then press 'Calculate' button to get the result!
-							</Text>
-						</ScrollView>
+					</View>
+					<View style={styles.resultTable}>
+						<Text style={styles.resultText}>
+							Result Table
+						</Text>
+					</View>
+					<View style={styles.doctorTable}>
+						<Text style={styles.doctorText}>
+							Doctor's note
+						</Text>
 					</View>
 				</View>
 				<View style={styles.footer} >
-					<View style={styles.buttonRow} >
-						<View style={styles.btnLabel}>
-							<Text style={styles.btnLabelText}>
-							Sot
-							</Text>
-						</View>
-						<TouchableOpacity ref={ref => this.touchable = ref} style={styles.button} onPress={() => this.showPopover1()}>
-							<Text style={styles.btnText}>
-							{this.state.tumor}
-							</Text>
-						</TouchableOpacity>
-						<Popover
-							isVisible={this.state.isVisible1}
-							onClose={() => this.closePopover1()}
-							popoverStyle={{width: fullWidth, height: (0.72*fullWidth), backgroundColor: '#fff'}}
-							>
-							<Text style={styles.popoverTitle}>Choose your stage</Text>
-							<ScrollView showsVerticalScrollIndicator={false}>
-								{
-									tumorOpt.map((l,i) => (
-										<ListItem
-											key={i}
-											avatar={<Avatar rounded title={l.value} size={70} height={70}/>}
-											onPress={() => this.setState({tumor: l.value}) + this.closePopover1()}
-											title={l.name}
-											titleStyle={{fontSize: (0.056*fullWidth),}}
-											subtitle={
-												<View style={styles.subtitleView}>
-													<Text style={{color: '#848484', marginLeft: 15, fontSize: 13,}}>{l.description}</Text>
-												</View>
-											}
-											
-											chevronColor={'#3c3c3c'}
-										/>
-									))
-								}
-							</ScrollView>
-						</Popover>
-					</View>
-					<View style={styles.buttonRow} >
-						<View style={styles.btnLabel}>
-							<Text style={styles.btnLabelText}>
-							Mieng dau
-							</Text>
-						</View>
-						<TouchableOpacity ref={ref => this.touchable = ref} style={styles.button} onPress={() => this.showPopover2()}>
-							<Text style={styles.btnText}>
-							{this.state.node}
-							</Text>
-						</TouchableOpacity>
-						<Popover
-							isVisible={this.state.isVisible2}
-							onClose={() => this.closePopover2()}
-							popoverStyle={{width:  fullWidth, height: (0.72*fullWidth), backgroundColor: '#fff'}}
-							>
-							<Text style={styles.popoverTitle}>Choose your stage</Text>
-							<ScrollView showsVerticalScrollIndicator={false}>
-								{
-									nodeOpt.map((l,i) => (
-										<ListItem
-											key={i}
-											avatar={<Avatar rounded title={l.value} size={70} height={70}/>}
-											onPress={() => this.setState({node: l.value}) + this.closePopover2()}
-											title={l.name}
-											titleStyle={{fontSize: (0.056*fullWidth),}}
-											subtitle={
-												<View style={styles.subtitleView}>
-													<Text style={{color: '#848484', marginTop: 5, marginLeft: 15, fontSize: 15,}}>{l.description}</Text>
-												</View>
-											}
-											
-											chevronColor={'#3c3c3c'}
-										/>
-									))
-								}
-							</ScrollView>
-						</Popover>
-					</View>
-					<View style={styles.buttonRow} >
-						<View style={styles.btnLabel}>
-							<Text style={styles.btnLabelText}>
-							+
-							</Text>
-						</View>
-						<TouchableOpacity ref={ref => this.touchable = ref} style={styles.button} onPress={() => this.showPopover3()}>
-							<Text style={styles.btnText}>
-							{this.state.metastasis}
-							</Text>
-						</TouchableOpacity>
-						<Popover
-							isVisible={this.state.isVisible3}
-							onClose={() => this.closePopover3()}
-							popoverStyle={{width: fullWidth, height: (0.72*fullWidth), backgroundColor: '#fff'}}
-							>
-							<Text style={styles.popoverTitle}>Choose your stage</Text>
-							<ScrollView showsVerticalScrollIndicator={false}>
-								{
-									metastasisOpt.map((l,i) => (
-										<ListItem
-											key={i}
-											avatar={<Avatar rounded title={l.value} size={(0.195*fullWidth)} height={(0.195*fullWidth)}/>}
-											onPress={() => this.setState({metastasis: l.value}) + this.closePopover3()}
-											title={l.name}
-											titleStyle={{fontSize: (0.056*fullWidth),}}
-											subtitle={
-												<View style={styles.subtitleView}>
-													<Text style={{color: '#848484', marginTop: (0.014*fullWidth), marginLeft: (0.042*fullWidth), fontSize: (0.042*fullWidth),}}>{l.description}</Text>
-												</View>
-											}
-											
-											chevronColor={'#3c3c3c'}
-										/>
-									))
-								}
-							</ScrollView>
-						</Popover>
-					</View>
+								
 					<TouchableOpacity style={styles.buttonRow} onPress={() => this._onPressButton2(this.state.tumor, this.state.node, this.state.metastasis)}>
-						<Svg width={0.89*fullWidth} height={0.153*fullWidth} viewBox='0 0 320 55'>
-						<Defs>
-							<LinearGradient id='gradient2' x1='0' y1='0' x2='100%' y2='100%'>
-								<Stop offset='0' stopColor="#71D6E6" stopOpacity="1" />
-								<Stop offset="1" stopColor="#328ACE" stopOpacity="1" />
-							</LinearGradient>
-						</Defs>
-						<Rect x='0' y='0' rx='5' ry='5' width={0.89*fullWidth} height={0.153*fullWidth} fill='url(#gradient2)'/>
-						</Svg>
-						<View style={styles.calBtn}>
-							<Text style={styles.calBtnText}>
-								Calculate
-							</Text>
-						</View>
-					</TouchableOpacity>
-					
-					<TouchableOpacity style={styles.buttonRow} onPress={() => this._onPressButton2(this.state.tumor, this.state.node, this.state.metastasis)}>
-						<Svg width={0.89*fullWidth} height={0.153*fullWidth} viewBox='0 0 320 55'>
-						<Defs>
-							<LinearGradient id='gradient2' x1='0' y1='0' x2='100%' y2='100%'>
-								<Stop offset='0' stopColor="#71D6E6" stopOpacity="1" />
-								<Stop offset="1" stopColor="#328ACE" stopOpacity="1" />
-							</LinearGradient>
-						</Defs>
-						<Rect x='0' y='0' rx='5' ry='5' width={0.89*fullWidth} height={0.153*fullWidth} fill='url(#gradient2)'/>
-						</Svg>
 						<View style={styles.calBtn}>
 							<Text style={styles.calBtnText}>
 								Send to Doctor
@@ -382,15 +245,6 @@ export class Myhealthnote extends Component {
 					</TouchableOpacity>
 					
 					<TouchableOpacity style={styles.buttonRow} onPress={() => this._onPressButton2(this.state.tumor, this.state.node, this.state.metastasis)}>
-						<Svg width={0.89*fullWidth} height={0.153*fullWidth} viewBox='0 0 320 55'>
-						<Defs>
-							<LinearGradient id='gradient2' x1='0' y1='0' x2='100%' y2='100%'>
-								<Stop offset='0' stopColor="#71D6E6" stopOpacity="1" />
-								<Stop offset="1" stopColor="#328ACE" stopOpacity="1" />
-							</LinearGradient>
-						</Defs>
-						<Rect x='0' y='0' rx='5' ry='5' width={0.89*fullWidth} height={0.153*fullWidth} fill='url(#gradient2)'/>
-						</Svg>
 						<View style={styles.calBtn}>
 							<Text style={styles.calBtnText}>
 								Save to my Health note
@@ -399,15 +253,6 @@ export class Myhealthnote extends Component {
 					</TouchableOpacity>
 					
 					<TouchableOpacity style={styles.buttonRow} onPress={() => this._onPressButton2(this.state.tumor, this.state.node, this.state.metastasis)}>
-						<Svg width={0.89*fullWidth} height={0.153*fullWidth} viewBox='0 0 320 55'>
-						<Defs>
-							<LinearGradient id='gradient2' x1='0' y1='0' x2='100%' y2='100%'>
-								<Stop offset='0' stopColor="#71D6E6" stopOpacity="1" />
-								<Stop offset="1" stopColor="#328ACE" stopOpacity="1" />
-							</LinearGradient>
-						</Defs>
-						<Rect x='0' y='0' rx='5' ry='5' width={0.89*fullWidth} height={0.153*fullWidth} fill='url(#gradient2)'/>
-						</Svg>
 						<View style={styles.calBtn}>
 							<Text style={styles.calBtnText}>
 								Return to CTCAE
@@ -415,11 +260,11 @@ export class Myhealthnote extends Component {
 						</View>
 					</TouchableOpacity>
 					
-					</View>
+				</View>
 					<TouchableOpacity style={styles.backBtn} onPress={() => this.props.navigation.goBack()}>
 						<Icon name='keyboard-backspace' size={30} color='#fff'/>
 					</TouchableOpacity>
-				</View>
+			</View>
 		</View>
     )
   }
@@ -455,89 +300,94 @@ const styles = StyleSheet.create({
 	body: {
 		flex: 1,
 	},
-	result: {
-		flex: 1,
-		alignItems: 'center',
+	personalInfo: {
+		flex: 2,
+		flexDirection: "row"
 	},
-	resultHeader: {
-		width: (0.89*fullWidth),
-		height: (0.153*fullWidth),
+	resultTable: {
+		flex: 4,
 		backgroundColor: 'rgba(255, 255, 255, 0.36)',
 		borderRadius: 5,
+		marginHorizontal: 15,
+		marginVertical: 10,
 	},
-	resultTitle: {
-		fontSize: (0.056*fullWidth),
+
+	resultText: {
 		color: '#fff',
-		marginLeft: 19,
-		marginVertical: 15,
+		fontSize: 16,
+		textAlign: 'left',
+		marginTop: 10,
+		marginLeft: 10,
 	},
-	resultDesc: {
-		fontFamily: 'Roboto',
+	doctorTable: {
+		flex: 3,
+		backgroundColor: 'rgba(255, 255, 255, 0.36)',
+		borderRadius: 5,
+		marginHorizontal: 15,
+		marginVertical: 10,
+	},
+	doctorText: {
+		color: '#fff',
+		fontSize: 16,
+		textAlign: 'left',
+		marginTop: 10,
+		marginLeft: 10,
+	},
+	avatarBlock: {
+		flex: 1,
+		alignItems: "center"
+	},
+	avatarImage: {
+		width: (0.2*fullWidth),
+		height: (0.2*fullWidth),
+	},
+	nameBlock: {
+		flex: 2,
+		flexDirection: "column",
+	},
+	nameTextBlock: {
+		flex: 1
+	},
+	tipsBlock: {
+		flex: 2
+	},
+	tipsText: {
+		color: "#fff",
 		fontSize: 17,
-		marginHorizontal: 25,
-		color: 'rgba(255, 255, 255, 0.78)',
-		marginTop: 20,
+	},
+	nameText: {
+		fontSize: 19,
+		color: "#fff",
+		fontWeight: "bold",
 	},
 	footer: {
-		height: (0.83*fullWidth),
+		height: (0.3*fullWidth),
 		backgroundColor: '#fff',
+		flexDirection: 'row',
 		width: '100%',
 		paddingVertical: 12,
 	},
 	buttonRow: {
 		flex: 1,
 		flexDirection: 'row',
-		marginHorizontal: 20,
+		marginHorizontal: 10,
 		marginVertical: 7,
 		borderRadius: 5,
-		backgroundColor: '#F5F4F4'
-	},
-	
-	button: {
-		flex: 1,
-		flexDirection: 'row',
-		backgroundColor: '#E7E7E7',
-		borderRadius: 5,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	btnText: {
-		fontFamily: 'Roboto',
-		fontSize: 16,
-		color: '#383838',
-		textAlign: 'center',
-		marginVertical: 17,
-	},
-	btnLabel: {
-		flex: 1,
-	},
-	btnLabelText: {
-		fontFamily: 'Roboto',
-		fontSize: 16,
-		color: '#383838',
-		marginLeft: 24,
-		marginVertical: 17,
-	},
-	popoverTitle: {
-		marginVertical: (0.027*fullWidth),
-		fontSize: (0.056*fullWidth),
-		color: '#000',
-		textAlign: 'center',
-	},
+		backgroundColor: '#71D6E6'
+	},	
 	calBtn: {
 		position: 'absolute',
 		width: '100%',
-		height: '100%',
 		top: 0,
 		left: 0,
 	},
 	calBtnText: {
 		fontFamily: 'Roboto',
-		fontSize: 19,
+		fontSize: 18,
 		color: '#fff',
 		fontWeight: 'bold',
 		textAlign: 'center',
-		marginVertical: 15,
+		marginVertical: 17,
 	},
 	backBtn: {
 		position: 'absolute',

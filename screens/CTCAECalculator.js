@@ -298,44 +298,12 @@ export class CTCAECalculator extends Component {
 							</ScrollView>
 						</Popover>
 					</View>
-					<View style={styles.buttonRow} >
+					<View style={styles.buttonRowPlus} >
 						<View style={styles.btnLabel}>
-							<Text style={styles.btnLabelText}>
-							+
+							<Text style={styles.btnLabelTextPlus}>
+							+ Them trieu chung
 							</Text>
 						</View>
-						<TouchableOpacity ref={ref => this.touchable = ref} style={styles.button} onPress={() => this.showPopover3()}>
-							<Text style={styles.btnText}>
-							{this.state.metastasis}
-							</Text>
-						</TouchableOpacity>
-						<Popover
-							isVisible={this.state.isVisible3}
-							onClose={() => this.closePopover3()}
-							popoverStyle={{width: fullWidth, height: (0.72*fullWidth), backgroundColor: '#fff'}}
-							>
-							<Text style={styles.popoverTitle}>Choose your stage</Text>
-							<ScrollView showsVerticalScrollIndicator={false}>
-								{
-									metastasisOpt.map((l,i) => (
-										<ListItem
-											key={i}
-											avatar={<Avatar rounded title={l.value} size={(0.195*fullWidth)} height={(0.195*fullWidth)}/>}
-											onPress={() => this.setState({metastasis: l.value}) + this.closePopover3()}
-											title={l.name}
-											titleStyle={{fontSize: (0.056*fullWidth),}}
-											subtitle={
-												<View style={styles.subtitleView}>
-													<Text style={{color: '#848484', marginTop: (0.014*fullWidth), marginLeft: (0.042*fullWidth), fontSize: (0.042*fullWidth),}}>{l.description}</Text>
-												</View>
-											}
-											
-											chevronColor={'#3c3c3c'}
-										/>
-									))
-								}
-							</ScrollView>
-						</Popover>
 					</View>
 					<TouchableOpacity style={styles.buttonRow} onPress={() => this._onPressButton2(this.state.tumor, this.state.node, this.state.metastasis)}>
 						<Svg width={0.89*fullWidth} height={0.153*fullWidth} viewBox='0 0 320 55'>
@@ -469,7 +437,7 @@ const styles = StyleSheet.create({
 		marginTop: 20,
 	},
 	footer: {
-		height: (0.83*fullWidth),
+		height: (1.04*fullWidth),
 		backgroundColor: '#fff',
 		width: '100%',
 		paddingVertical: 12,
@@ -481,6 +449,15 @@ const styles = StyleSheet.create({
 		marginVertical: 7,
 		borderRadius: 5,
 		backgroundColor: '#F5F4F4'
+	},
+	buttonRowPlus: {
+		flex: 1,
+		flexDirection: 'row',
+		width: '45%',
+		marginHorizontal: 20,
+		marginVertical: 7,
+		borderRadius: 5,
+		backgroundColor: '#2E88CD'
 	},
 	
 	button: {
@@ -496,7 +473,7 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		color: '#383838',
 		textAlign: 'center',
-		marginVertical: 17,
+		marginVertical: 12,
 	},
 	btnLabel: {
 		flex: 1,
@@ -506,7 +483,14 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		color: '#383838',
 		marginLeft: 24,
-		marginVertical: 17,
+		marginVertical: 12,
+	},
+	btnLabelTextPlus: {
+		fontFamily: 'Roboto',
+		fontSize: 16,
+		color: '#fff',
+		marginLeft: 24,
+		marginVertical: 12,
 	},
 	popoverTitle: {
 		marginVertical: (0.027*fullWidth),
@@ -527,7 +511,7 @@ const styles = StyleSheet.create({
 		color: '#fff',
 		fontWeight: 'bold',
 		textAlign: 'center',
-		marginVertical: 15,
+		marginVertical: 10,
 	},
 	backBtn: {
 		position: 'absolute',

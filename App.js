@@ -20,7 +20,7 @@ const AppNavigator = createStackNavigator(
   MyhealthnoteScreen: {screen:Myhealthnote, navigationOptions: {header: null}} ,
   },
   {
-    initialRouteName: 'LoginScreen',
+    initialRouteName: 'CTCAEScreen',
     
   },
   
