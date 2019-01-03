@@ -34,7 +34,7 @@ export default class Login extends Component {
 				[
 					
 					{text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-					{text: 'Go to TNM', onPress:() => this.props.navigation.push('TNMScreen')},
+					{text: 'Go to CTCAE', onPress:() => this.props.navigation.push('CTCAEScreen')},
 				],
 				{ cancelable: false }
 				)  
@@ -76,7 +76,7 @@ export default class Login extends Component {
 						<View style={{width:'50%'}}>
 						<Image style={styles.appLogo} source={require('../images/logo.png')} resizeMode='contain'/>
 						</View>
-						<Text style={styles.appWelcome} >TNM Calculator</Text>
+						<Text style={styles.appWelcome} >CTCAE Calculator</Text>
 						<Text style={styles.appLogRequest} >Please login or sign-up</Text>
 
 					</View>
