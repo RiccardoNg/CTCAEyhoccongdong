@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {AppRegistry,Picker, SectionList, Alert, View, Text, Button, TextInput, StyleSheet, ScrollView, TouchableOpacity, Dimensions, Image, FlatList, ListView } from 'react-native';
+import {AppRegistry,Picker, SectionList, Alert, View, Text, Button, TextInput, StyleSheet, ScrollView, TouchableOpacity, Dimensions, Image, FlatList } from 'react-native';
 import { FormLabel, FormInput, FormValidationMessage, SearchBar, ListItem, Avatar, Rating } from 'react-native-elements';
 import Popover from 'react-native-popover-view';
 import {Rect as RectPop} from 'react-native-popover-view';
@@ -87,8 +87,7 @@ const metastasisOpt= [
 ]
 export class Myhealthnote extends Component {
   constructor(props) {
-	super(props);
-	this.itemRef = firebaseApp.database();
+    super(props);
     this.state = { 
 		username: 'Nhat',
 		tumor: tumorFromExcel[0],
@@ -96,7 +95,7 @@ export class Myhealthnote extends Component {
 		metastasis: metastasisFromExcel[0],
 		result: '-abc' ,
 		dataSource: [],
-		dataSourceFirebase: new ListView.DataSource({rowHasChanged:(r1,r2) => r1 !== r2}),
+		dataSourceFirebase: [],
 		tumorData: [],
 		testText:'',
 		resultTitle: '',
@@ -164,43 +163,24 @@ export class Myhealthnote extends Component {
   }
 
   getData2(){
+
+	
+
 	let test = firebaseApp.database().ref('/DianosisDocument/DDricardong/1stRecord/biengan');
 	test.once('value').then(snapshot => {
 		// snapshot.val() is the dictionary with all your keys/values from the '/store' path
 		this.setState({ currentDelagoId: test.key})
 	})
-  }
-
-  setData2(){
-
-  }
-
-  pushData2(){
-
-  }
-
-  deleteData(){
-    firebase.database().ref('DelagoID/quanpham0204/').remove();
-  }
-
-  listenForItems(itemRef){
-	  var items=[];
-	  this.itemRef.ref('DianosisDocument/DDriccardong/1stRecord').on('child_added', (dataSnapshot) =>{
-		items.push({
-			name:dataSnapshot.val(),
-			key: dataSnapshot.key
-		});
-		this.setState({
-			dataSourceFirebase: this.state.dataSourceFirebase.cloneWithRows(items)
-		});
-	  });
+		
+	
+	
+	
   }
   
   componentDidMount(){
 	  
-	//this.getData1();
+	this.getData1();
 	//this.getData2();
-	this.listenForItems(this.itemRef);
   }
 	state = {
 	isVisible1: false,
@@ -227,10 +207,6 @@ export class Myhealthnote extends Component {
   closePopover3() {
     this.setState({isVisible3: false});
   }
-
-
- 
-
 	
 	
   render() {
@@ -282,7 +258,7 @@ export class Myhealthnote extends Component {
 						<Text style={styles.resultText}>
 							Result Table
 						</Text>
-						{/* <FlatList
+						<FlatList
 							data={this.state.dataSource}
 							renderItem={({item}) => 
 								<Text>
@@ -295,28 +271,16 @@ export class Myhealthnote extends Component {
 							}
 							keyExtractor={(item, index) => index}
 							
-						/> */}
+						/>
 					</View>
 					<View style={styles.doctorTable}>
 						<Text style={styles.doctorText}>
 							Doctor's note
 						</Text>
 						
-						{/* <Text style={styles.doctorText}>
+						<Text style={styles.doctorText}>
 						{this.state.currentDelagoId}
-						</Text> */}
-
-						<ListView
-							dataSource ={this.state.dataSourceFirebase}
-							renderRow = {(rowData)=>
-								<View>
-									<Text>
-									{rowData.key}: {rowData.name}
-										
-									</Text>	
-								</View>
-							}
-						/>
+						</Text>
 						
 					</View>
 				</View>

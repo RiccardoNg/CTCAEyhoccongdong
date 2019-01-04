@@ -6,6 +6,7 @@ import CTCAE from './screens/CTCAECalculator';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
 import Myhealthnote from './screens/Myhealthnote';
+import RealtimeDB from './screens/RealtimeDB';
 
 
 import { createStackNavigator, NavigationActions } from 'react-navigation';
@@ -18,9 +19,10 @@ const AppNavigator = createStackNavigator(
   LoginScreen: {screen:Login, navigationOptions: {header: null}} ,
   SignupScreen: {screen:Signup, navigationOptions: {header: null}} ,
   MyhealthnoteScreen: {screen:Myhealthnote, navigationOptions: {header: null}} ,
+  RealtimeDBScreen: {screen:RealtimeDB, navigationOptions: {header: null}} ,
   },
   {
-    initialRouteName: 'CTCAEScreen',
+    initialRouteName: 'MyhealthnoteScreen',
     
   },
   
