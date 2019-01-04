@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import {AppRegistry,Picker, SectionList, Alert, View, Text, Button, TextInput, StyleSheet, ScrollView, TouchableOpacity, Dimensions, Image } from 'react-native';
+import {AppRegistry,Picker, SectionList, Alert, View, Text, Button, TextInput, StyleSheet, ScrollView, TouchableOpacity, Dimensions, Image, FlatList } from 'react-native';
 import { FormLabel, FormInput, FormValidationMessage, SearchBar, ListItem, Avatar, Rating } from 'react-native-elements';
 import Popover from 'react-native-popover-view';
 import {Rect as RectPop} from 'react-native-popover-view';
 import {Svg, Rect, Defs, ClipPath, Circle, Path, G, LinearGradient, Stop, Use, Symbol, Line} from 'react-native-svg';
+
+import {firebaseApp} from '../components/FirebaseConfig.js'
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 //import TextField from 'material-ui/TextField';
@@ -93,9 +95,16 @@ export class Myhealthnote extends Component {
 		metastasis: metastasisFromExcel[0],
 		result: '-abc' ,
 		dataSource: [],
+		dataSourceFirebase: [],
 		tumorData: [],
 		testText:'',
 		resultTitle: '',
+		currentCaseid: 'no',
+		currentT:'',
+		currentN:'',
+		currentM:'',
+		currentStage:'',
+		currentDelagoId:'',
 		};
 	
   }
@@ -132,16 +141,17 @@ export class Myhealthnote extends Component {
 	var c = a + b
     Alert.alert('You tapped the button! c: ' + c);
   }
-  
-    componentDidMount(){
-	  
-      return fetch('https://api.myjson.com/bins/884q6')
+
+  getData1(){
+	return fetch('https://api.myjson.com/bins/884q6')
       .then((response) => response.json())
       .then((responseJson) => {
 
         this.setState({
+          isLoading: false,
           dataSource: responseJson.tnm,
-          tumorData: responseJson.tnm.caseid,
+		  tumorData: responseJson.tnm.caseid,
+		  
         }, function(){
 
         });
@@ -149,7 +159,28 @@ export class Myhealthnote extends Component {
       })
       .catch((error) =>{
         console.error(error);
-      });
+      });  
+  }
+
+  getData2(){
+
+	
+
+	let test = firebaseApp.database().ref('/DianosisDocument/DDricardong/1stRecord/biengan');
+	test.once('value').then(snapshot => {
+		// snapshot.val() is the dictionary with all your keys/values from the '/store' path
+		this.setState({ currentDelagoId: test.key})
+	})
+		
+	
+	
+	
+  }
+  
+  componentDidMount(){
+	  
+	this.getData1();
+	//this.getData2();
   }
 	state = {
 	isVisible1: false,
@@ -227,11 +258,30 @@ export class Myhealthnote extends Component {
 						<Text style={styles.resultText}>
 							Result Table
 						</Text>
+						<FlatList
+							data={this.state.dataSource}
+							renderItem={({item}) => 
+								<Text>
+								{this.state.currentCaseid = item.caseid}, 
+								{this.state.currentT = item.T},
+								{this.state.currentN = item.N},
+								{this.state.currentM = item.M},
+								{this.state.currentStage = item.Stage}
+								</Text>
+							}
+							keyExtractor={(item, index) => index}
+							
+						/>
 					</View>
 					<View style={styles.doctorTable}>
 						<Text style={styles.doctorText}>
 							Doctor's note
 						</Text>
+						
+						<Text style={styles.doctorText}>
+						{this.state.currentDelagoId}
+						</Text>
+						
 					</View>
 				</View>
 				<View style={styles.footer} >
